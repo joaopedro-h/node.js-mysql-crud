@@ -1,30 +1,29 @@
-const connection = require("../database/connection"); /* Feito a imporatação com o banco de dados. */
+const Produto = require("../models/Produto");
+const {salvarProduto} = require("./salvarProduto");
 
-async function cadastrarProduto(produto) {
+async function cadastrarProduto(rl, menu) {
     
-    /* Cria a query no SQL, oque significa = Inserir os dados na tabela "produtos". */
-    /* (nome, preco, quantidade) são os campos da tabela que vão receber os valores. */
-    // (?,?,?) vão ser substituidos pelos valores reais.
+    console.clear();
+    rl.question(`Insira o nome do produto: `, (nome) => {
 
-    const sql = `  
-     INSERT INTO produtos(nome, preco, quantidade)
-     VALUES (?,?,?)
-    `;
-    
-    /* Cria o um array com os valores que substituirão os "?" */
-    const values = [
-        produto.nome,
-        produto.preco,
-        produto.quantidade
-    ];
+        rl.question(`Insira o preço do produto: `, async (preco) => {
 
-    /* Executa a query. */
-    const [resultado] = await connection.execute(sql, values); /* É enviado a query SQL e valores, await faz a função esperar o banco responder o resultado. */
+            rl.question(`Insira a quantidade: `, async (quantidade) => {
 
-    console.log("Produto cadastrado!");
-    console.log("ID:", resultado.insertId);
-    
+                const produto = new Produto (
+                    nome,
+                    Number(preco),
+                    quantidade
+                );
+
+                await salvarProduto(produto);
+
+                rl.close;
+
+                menu();
+            });
+        });
+    });
 }
 
-module.exports = {cadastrarProduto};
-
+module.exports = cadastrarProduto;

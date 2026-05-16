@@ -1,19 +1,51 @@
-const Produto = require("./models/Produto");
-const {cadastrarProduto} = require("./services/cadastrarProduto");
+const readline = require('readline');
 
-async function main() {
+const rl = readline.createInterface({  /* Rl utilizado para receber input do usuário nas funções. */
+  input: process.stdin,
+  output: process.stdout
+});
+
+const cadastrarProduto = require("./services/cadastrarProduto");
+const {salvarProduto} = require("./services/salvarProduto");
+
+async function menu() {
     
-    const produto = new Produto();
-    produto.nome = "Ceular";
-    produto.preco = 1800.00;
-    produto.quantidade = 2;
+    console.log("============================");
+    console.log("MENU PRINCIPAL 📊\n");
+    console.log("1. Cadastrar produto ➕");
+    console.log("2. Remover produto ➖");
+    console.log("3. Listar produtos 📝");
+    console.log("0. Sair ❌");
+    console.log("============================\n");
+    
+    rl.question(`Qual opção deseja? `, (opcao) => {
 
-    try {
-        await cadastrarProduto(produto);
-        console.log("Produto cadastrado com sucesso!");
-    } catch (error) {
-        console.error("Erro ao cadastrar produto:", error);
-    }
+        opcao = Number(opcao);
+
+        switch (opcao) {
+
+            case 1:
+                cadastrarProduto(rl, menu);
+                break;
+            
+            case 2:
+                removerProduto();
+                break;
+                
+            case 3:
+                listarProdutos();
+                break;
+
+            case 0:
+                sair();
+                break;
+
+            default:
+                console.log("Opção inválida..");
+                menu();
+                break;
+        }
+    });
 }
 
-main();
+menu();
