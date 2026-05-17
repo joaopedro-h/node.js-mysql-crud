@@ -9,6 +9,7 @@ const cadastrarProduto = require("./services/cadastrarProduto");
 const removerProduto = require("./services/removerProduto");
 const listarProdutos = require("./services/listarProdutos");
 const editarProduto = require("./services/editarProduto");
+const valorEstoque = require("./services/valorEstoque");
 const pause = require("./services/pause");
 
 async function menu() {
@@ -20,6 +21,7 @@ async function menu() {
     console.log("2. Remover produto ➖");
     console.log("3. Listar produtos 📃");
     console.log("4. Editar produto 📝");
+    console.log("5. Valor do estoque 💰");
     console.log("0. Sair ❌\n");
     console.log("============================\n");
     
@@ -43,6 +45,10 @@ async function menu() {
 
             case 4:
                 editarProduto(rl,menu,pause);
+                break;
+
+            case 5:
+                valorEstoque(rl,menu,pause);
                 break;
 
             case 0:

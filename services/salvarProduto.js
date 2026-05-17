@@ -22,7 +22,7 @@ async function salvarProduto(produto,rl,menu,pause) {
     /* Executa a query. */
     const [resultado] = await connection.execute(sql, values); /* É enviado a query SQL e valores, await faz a função esperar o banco responder o resultado. */
 
-    console.log("Produto cadastrado!");
+    console.log("\nProduto cadastrado! ✔️");
     console.log("ID:", resultado.insertId);
     
     pause(rl,menu);

@@ -15,6 +15,12 @@ async function editarProduto(rl,menu,pause) {
     FROM produtos`;
 
     const [produtos] = await connection.execute(sqlProdutos);
+
+    if (produtos.length === 0 ) {
+      console.log("\nNenhum produto cadastrado! ❌");
+      pause(rl,menu);
+      return;
+    }
     
     console.table(produtos);
 
