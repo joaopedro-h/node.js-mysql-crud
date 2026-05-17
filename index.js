@@ -8,17 +8,19 @@ const rl = readline.createInterface({  /* Rl utilizado para receber input do usu
 const cadastrarProduto = require("./services/cadastrarProduto");
 const removerProduto = require("./services/removerProduto");
 const listarProdutos = require("./services/listarProdutos");
+const editarProduto = require("./services/editarProduto");
 const pause = require("./services/pause");
 
 async function menu() {
     
     console.clear();
-    console.log("============================");
+    console.log("============================\n");
     console.log("MENU PRINCIPAL 📊\n");
     console.log("1. Cadastrar produto ➕");
     console.log("2. Remover produto ➖");
     console.log("3. Listar produtos 📝");
-    console.log("0. Sair ❌");
+    console.log("4. Editar produto");
+    console.log("0. Sair ❌\n");
     console.log("============================\n");
     
     rl.question(`Qual opção deseja? `, (opcao) => {
@@ -28,7 +30,7 @@ async function menu() {
         switch (opcao) {
 
             case 1:
-                cadastrarProduto(rl,menu);
+                cadastrarProduto(rl,menu,pause);
                 break;
             
             case 2:
@@ -39,8 +41,13 @@ async function menu() {
                 listarProdutos(rl,menu,pause);
                 break;
 
+            case 4:
+                editarProduto(rl,menu,pause);
+                break;
+
             case 0:
-                sair();
+                console.log("Saindo do sistema...");
+                rl.close();
                 break;
 
             default:

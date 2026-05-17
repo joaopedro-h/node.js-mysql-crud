@@ -1,6 +1,7 @@
 const connection = require("../database/connection"); /* Feito a imporatação com o banco de dados. */
 
-async function salvarProduto(produto) {
+
+async function salvarProduto(produto,rl,menu,pause) {
     
     /* Cria a query no SQL, oque significa = Inserir os dados na tabela "produtos". */
     /* (nome, preco, quantidade) são os campos da tabela que vão receber os valores. */
@@ -24,6 +25,7 @@ async function salvarProduto(produto) {
     console.log("Produto cadastrado!");
     console.log("ID:", resultado.insertId);
     
+    pause(rl,menu);
 }
 
 module.exports = {salvarProduto};
