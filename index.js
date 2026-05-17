@@ -18,8 +18,8 @@ async function menu() {
     console.log("MENU PRINCIPAL 📊\n");
     console.log("1. Cadastrar produto ➕");
     console.log("2. Remover produto ➖");
-    console.log("3. Listar produtos 📝");
-    console.log("4. Editar produto");
+    console.log("3. Listar produtos 📃");
+    console.log("4. Editar produto 📝");
     console.log("0. Sair ❌\n");
     console.log("============================\n");
     
@@ -46,12 +46,12 @@ async function menu() {
                 break;
 
             case 0:
-                console.log("Saindo do sistema...");
+                console.log("Saindo do sistema...❌");
                 rl.close();
                 break;
 
             default:
-                console.table("Opção inválida..");
+                console.table("Opção inválida! ❌");
                 menu();
                 break;
         }

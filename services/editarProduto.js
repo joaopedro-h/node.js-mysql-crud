@@ -37,6 +37,12 @@ async function editarProduto(rl,menu,pause) {
                     console.clear();
                     rl.question(`Novo nome: `, async (novoNome) => {
 
+                        if (!novoNome) {
+                            console.log("Nome inválido! ❌");
+                            pause(rl,menu);
+                            return;
+                        }
+
                         const sqlNome = 
                         `UPDATE produtos
                         SET nome = ?
@@ -49,7 +55,7 @@ async function editarProduto(rl,menu,pause) {
 
                         await connection.execute(sqlNome,values);
 
-                        console.log("Nome alterado!");
+                        console.log("Nome alterado! ✔️");
                         pause(rl,menu);
                     });
 
@@ -58,6 +64,14 @@ async function editarProduto(rl,menu,pause) {
                 case 2:
 
                     rl.question(`Novo preço: `, async (novoPreco) => {
+
+                        const preco = Number(novoPreco);
+
+                        if (isNaN(preco) || preco <= 0) {
+                            console.log("Preço inválido! ❌");
+                            pause(rl,menu);
+                            return;
+                        }
 
                         const sqlPreco = 
                         `UPDATE produtos
@@ -71,7 +85,7 @@ async function editarProduto(rl,menu,pause) {
 
                         await connection.execute(sqlPreco,values);
 
-                        console.log("Preço alterado!");
+                        console.log("Preço alterado! ✔️");
                         pause(rl,menu);
                     });
 
@@ -80,6 +94,14 @@ async function editarProduto(rl,menu,pause) {
                 case 3:
                     
                     rl.question(`Nova quantidade: `, async (novaQuantidade) => {
+
+                        const quantidade = Number(novaQuantidade);
+
+                        if (isNaN(quantidade) || quantidade <= 0) {
+                            console.log("Quantidade inválida! ❌");
+                            pause(rl,menu);
+                            return;
+                        }
 
                         const sqlQuantidade = 
                         `UPDATE produtos
@@ -93,22 +115,23 @@ async function editarProduto(rl,menu,pause) {
 
                         await connection.execute(sqlQuantidade,values);
 
-                        console.log("Quantidade alterada!");
+                        console.log("Quantidade alterada! ✔️");
                         pause(rl,menu);
                     });                
 
                 break;
 
                 case 0:
-
+                    console.log("Voltando ao menu.. ↩️");
                     pause(rl,menu);    
 
                 break;
 
                 default:
-                    console.log("Opção inválida!");
+                    console.log("Opção inválida! ❌");
+                    pause(rl,menu);
                 
-                    break;
+                break;
             }
         });
     });

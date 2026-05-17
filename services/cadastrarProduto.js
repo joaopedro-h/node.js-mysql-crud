@@ -9,7 +9,7 @@ async function cadastrarProduto(rl,menu,pause) {
         rl.question(`Insira o preço do produto: `, async (preco) => {
 
             if (preco <= 0) {
-                console.log("Preço inválido!");
+                console.log("Preço inválido! ❌");
                 pause(rl,menu);
                 return;
             }
@@ -17,7 +17,7 @@ async function cadastrarProduto(rl,menu,pause) {
             rl.question(`Insira a quantidade: `, async (quantidade) => {
                 
                 if (quantidade <= 0) {
-                    console.log("Quantidade inválida!");
+                    console.log("Quantidade inválida! ❌");
                     pause(rl,menu);
                     return;
                 }
